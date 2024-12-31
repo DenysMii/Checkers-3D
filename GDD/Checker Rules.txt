@@ -1,0 +1,29 @@
+Rules:
+
+8x8 board and 24 checkers (12 white, 12 black).
+
+White goes first.
+
+When moving, the checker moves to an empty field diagonally by one cell and only forward.
+
+If there is a checker of the opposite color in front of the checker, and the field behind it is free, then the checker can beat it.
+
+You can also beat backwards, if possible.
+
+If after beating it is possible to beat another checker, the player can do it.
+
+It is obligatory to hit (not the opponent, but his checker).
+
+After a checker reaches the opposite end of the board, it becomes a king.
+
+The king can move any number of squares diagonally, both forward and backward. The same applies to the possibility of beating.
+
+If a checker falls on the king's board during the process of beating, it immediately becomes a king and moves on as a king.
+
+The winner of the game is the one who managed to beat all the checkers and kings of the opponent, or when the opponent cannot make a move 
+(all the remaining checkers and kings of the opponent are blocked by the checkers of another player).
+
+If no checker has been beaten within 40 moves, the game is considered a draw.
+
+Players can agree to a draw earlier if they see no prospects of winning.
+

@@ -1,0 +1,43 @@
+Assets List:
+
+Models:
+• White checker
+• Black checker
+• White king
+• Black king
+• 8x8 board
+• Black Win scene
+• White Win scene
+• Draw scene
+
+Animations:
+• Zoom in board
+• Rotate board
+• Checker capture
+• King capture
+
+Textures:
+• Green cell
+• Yellow cell
+• Red cell
+• Plastic checkers
+• Wooden checkers
+• Glass checkers
+• Default board
+• Wooden board
+• Metal board
+• Glass board
+
+Sprites:
+• Confirmation window
+• Settings icon (gear)
+• Draw icon (equal)
+• Surrender icon (black flag)
+
+Sounds:
+• Checker move
+• Capture
+• End of game (win / lose)
+• End of game (draw)
+• Turning into a king
+• Confirmation window
