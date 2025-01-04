@@ -1,0 +1,54 @@
+Assets List:
+
+Models:
+• White checker
+• Black checker
+• White king
+• Black king
+• 8x8 board
+• Pile of broken checkers
+• Result sign
+• Handshake
+• Different broken checkers
+
+Animations:
+• Zoom in board
+• Rotate board
+• Checker capture
+• King capture
+
+Textures/Materials:
+• Green square
+• Yellow square
+• Red square
+• Default checkers
+• Wooden checkers
+• Glass checkers
+• Default board
+• Wooden board
+• Metal board
+• Glass board
+• Glass board
+• Floor tiling
+
+Sprites:
+• Confirmation window
+• Settings icon (gear)
+• Draw icon (equal)
+• Surrender icon (black flag)
+• Black king crown
+• White king crown
+
+Prefabs:
+• Black checker
+• White checker
+• Black king
+• White king
+
+Sounds:
+• Checker move
+• Capture
+• End of game (win / lose)
+• End of game (draw)
+• Turning into a king
+• Confirmation window
