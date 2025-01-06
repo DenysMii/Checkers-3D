@@ -10,7 +10,7 @@ ModelImporter:
       name: a_handshake_between_two_people_The_left_hand_is_in_a_light_brow
     second: {fileID: 2100000, guid: 8b1a8aba17f85aa40a480e67127f080a, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1

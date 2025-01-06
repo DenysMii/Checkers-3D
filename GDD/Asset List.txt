@@ -21,14 +21,14 @@ Textures/Materials:
 • Green square
 • Yellow square
 • Red square
+• Gold
+• Silver
 • Default checkers
 • Wooden checkers
 • Glass checkers
 • Default board
 • Wooden board
 • Metal board
-• Glass board
-• Glass board
 • Floor tiling
 
 Sprites:
@@ -44,6 +44,9 @@ Prefabs:
 • White checker
 • Black king
 • White king
+• Default board
+• Wooden board
+• Metal board
 
 Sounds:
 • Checker move
