@@ -30,6 +30,9 @@ Textures/Materials:
 • Wooden board
 • Metal board
 • Floor tiling
+• Button base
+• Button text
+• Light wood
 
 Sprites:
 • Confirmation window
@@ -40,13 +43,14 @@ Sprites:
 • White king crown
 
 Prefabs:
-• Black checker
-• White checker
+• Checker
 • Black king
 • White king
 • Default board
 • Wooden board
 • Metal board
+• Play again button
+• Result sign
 
 Sounds:
 • Checker move
