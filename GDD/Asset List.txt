@@ -41,6 +41,7 @@ Sprites:
 • Surrender icon (black flag)
 • Black king crown
 • White king crown
+• Exit icon (cross)
 
 Prefabs:
 • Checker
