@@ -1,15 +1,14 @@
 Assets List:
 
 Models:
-• White checker
-• Black checker
-• White king
-• Black king
-• 8x8 board
+• Checker
+• King
+• Board
 • Pile of broken checkers
+• Play again button
 • Result sign
 • Handshake
-• Different broken checkers
+• Background checkers
 
 Animations:
 • Zoom in board
@@ -36,20 +35,21 @@ Textures/Materials:
 
 Sprites:
 • Confirmation window
-• Settings icon (gear)
-• Draw icon (equal)
-• Surrender icon (black flag)
-• Black king crown
-• White king crown
-• Exit icon (cross)
+• Play button
+• Settings button (menu)
+• Settings button (play)
+• Draw icon
+• Surrender icon
+• Golden crown
+• Silver crown
+• Exit button
+• Back button
 
 Prefabs:
 • Checker
 • Black king
 • White king
-• Default board
-• Wooden board
-• Metal board
+• Board
 • Play again button
 • Result sign
 
