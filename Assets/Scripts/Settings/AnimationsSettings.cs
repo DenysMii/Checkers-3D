@@ -1,0 +1,36 @@
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class AnimationsSettings : MonoBehaviour
+{
+    const string ANIM_PREF_NAME = "Animations";
+
+    [SerializeField] private Toggle animationsToggle;
+
+    void Start()
+    {
+        if (PlayerPrefs.HasKey(ANIM_PREF_NAME))
+            PlayerPrefsSetAnimations();
+        else
+            ToggleSetAnimations(true);
+
+        animationsToggle.onValueChanged.AddListener(OnAnimationsChanged);
+    }
+
+    private void OnAnimationsChanged(bool isOn)
+    {
+        ToggleSetAnimations(isOn);
+    }
+
+    private void PlayerPrefsSetAnimations()
+    {
+        animationsToggle.isOn = PlayerPrefs.GetInt(ANIM_PREF_NAME) == 1;
+    }
+
+    public void ToggleSetAnimations(bool isOn)
+    {
+        int toggleInt = isOn ? 1 : 0;
+        PlayerPrefs.SetInt(ANIM_PREF_NAME, toggleInt);
+    }
+}

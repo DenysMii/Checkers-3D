@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1431389513958144156}
   - component: {fileID: 6524579967032085211}
   m_Layer: 0
-  m_Name: Golden Crown
+  m_Name: Crown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 18031219476252365}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.094, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0.094, z: -0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!1001 &3656552075948229934
 PrefabInstance:
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: be79b1a18d6c44a44b9da27556a02c29, type: 2}
     - target: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       propertyPath: m_Name
-      value: King
+      value: White King
       objectReference: {fileID: 0}
     - target: {fileID: 4567408375802172189, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

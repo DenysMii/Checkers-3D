@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad753cb08a528694f9e6e0785d1d1163, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  blackSquareMaterial: {fileID: 2100000, guid: 0c66fb56a40020d46a9c5294354a32ae, type: 2}
+  whiteSquareMaterial: {fileID: 2100000, guid: 16b5555ebae394d4bba041f123be8a2c, type: 2}
+  bordersMaterial: {fileID: 2100000, guid: 04369665c63e13b4c88c1137cd77bb88, type: 2}
