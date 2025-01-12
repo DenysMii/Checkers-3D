@@ -13,7 +13,7 @@ public class BoardSettings : MonoBehaviour
     [SerializeField] private Dropdown boardDropdown;
     [SerializeField] private BoardVariant[] boardVariants;
 
-    private void Start()
+    public void LoadSettings()
     {
         if (PlayerPrefs.HasKey(BOARD_PREF_NAME))
             PlayerPrefsSetVariant();

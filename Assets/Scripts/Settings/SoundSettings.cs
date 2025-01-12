@@ -9,7 +9,7 @@ public class SoundSettings : MonoBehaviour
     [SerializeField] private Slider soundSlider;
     [SerializeField] private Text percentage;
 
-    private void Start()
+    public void LoadSettings()
     {
         if (PlayerPrefs.HasKey(SOUND_PREF_NAME))
             PlayerPrefsSetVolume();

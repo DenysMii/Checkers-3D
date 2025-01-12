@@ -11,7 +11,7 @@ public class PiecesSettings : MonoBehaviour
     [SerializeField] private Dropdown piecesDropdown;
     [SerializeField] private PiecesVariant[] piecesVariants;
 
-    private void Start()
+    public void LoadSettings()
     {
         if (PlayerPrefs.HasKey(PIECES_PREF_NAME))
             PlayerPrefsSetVariant();
@@ -26,7 +26,7 @@ public class PiecesSettings : MonoBehaviour
         SetVariant(index);
     }
 
-    private void PlayerPrefsSetVariant()
+    public void PlayerPrefsSetVariant()
     {
         int index = PlayerPrefs.GetInt(PIECES_PREF_NAME);
         piecesDropdown.value = index;

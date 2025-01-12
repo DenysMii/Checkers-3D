@@ -8,7 +8,7 @@ public class AnimationsSettings : MonoBehaviour
 
     [SerializeField] private Toggle animationsToggle;
 
-    void Start()
+    public void LoadSettings()
     {
         if (PlayerPrefs.HasKey(ANIM_PREF_NAME))
             PlayerPrefsSetAnimations();
