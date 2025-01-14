@@ -4,13 +4,10 @@ public class SquareBehaviour : MonoBehaviour
 {
     public int[] boardPos { get; set; }
     public bool isOccupied { get; set; }
-    public bool attachedPieceBehaviour { get; set; }
 
     private HighlightStatus highlightStatus;
     private Renderer squareRenderer;
     
-    
-
     private void Start()
     {
         highlightStatus = HighlightStatus.NotHighlighted;

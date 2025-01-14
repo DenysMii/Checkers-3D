@@ -47,6 +47,7 @@ public class BoardSettings : MonoBehaviour
         Renderer[] blackSquaresRenderers = blackSquaresHolder.GetComponentsInChildren<Renderer>();
         foreach (Renderer bsRenderer in blackSquaresRenderers)
             bsRenderer.material = selectedVariant.blackSquareMaterial;
+        StaticData.blackSquareMaterial = selectedVariant.blackSquareMaterial;
 
         PlayerPrefs.SetInt(BOARD_PREF_NAME, index);
     }

@@ -3,14 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PiecesGenerator piecesGenerator;
+    [SerializeField] private BoardGenerator boardGenerator;
     [SerializeField] private PlayerPrefsLoader playerPrefsLoader;
     [SerializeField] private string debugSceneName;
 
     private void Start()
     {
-        if(piecesGenerator != null)
-            piecesGenerator.GeneratePiecesFromStaticData();
+        if(boardGenerator != null)
+        {
+            boardGenerator.SetSquareObjects();
+            boardGenerator.GeneratePiecesFromStaticData();
+
+        }
 
         if(playerPrefsLoader != null)
             playerPrefsLoader.LoadPlayerPrefs();

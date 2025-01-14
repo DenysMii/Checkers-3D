@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEditor;
 
-public class PiecesGenerator : MonoBehaviour
+public class BoardGenerator : MonoBehaviour
 {
     [SerializeField] private float startPos;
     [SerializeField] private float squaresDiff;
 
+    [SerializeField] private SquaresHighlighter squaresHighlighter;
+    [SerializeField] private GameObject squaresHolder;
     [SerializeField] private GameObject whitePiecesHolder;
     [SerializeField] private GameObject blackPiecesHolder;
 
@@ -13,6 +15,24 @@ public class PiecesGenerator : MonoBehaviour
     [SerializeField] private GameObject blackCheckerPrefab;
     [SerializeField] private GameObject whiteKingPrefab;
     [SerializeField] private GameObject blackKingPrefab;
+
+    public void SetSquareObjects()
+    {
+        Transform[] squares = squaresHolder.GetComponentsInChildren<Transform>();
+        int squaresCounter = 1;
+
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = i % 2; j < 8; j += 2)
+            {
+                SquareBehaviour newSquareBehaviour = squares[squaresCounter].gameObject.AddComponent<SquareBehaviour>();
+                newSquareBehaviour.boardPos = new int[2] { i, j };
+                StaticData.squaresBehaviourScripts[i, j] = newSquareBehaviour;
+
+                squaresCounter++;
+            }
+        }
+    }
 
     public void GeneratePiecesFromStaticData()
     {
@@ -59,15 +79,14 @@ public class PiecesGenerator : MonoBehaviour
         newPiece.transform.SetLocalPositionAndRotation(localPos, newPiece.transform.rotation);
 
         PieceBehaviour newPieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
+        newPieceBehaviour.squaresHighlighter = squaresHighlighter;
         SetSquareBehavoiur(newPieceBehaviour, i, j);
         
     }
 
     private void SetSquareBehavoiur(PieceBehaviour pieceBehaviour, int i, int j )
     {
-        SquareBehaviour squareBehaviour = pieceBehaviour.attachedSquareBehaviour;
-        squareBehaviour.attachedPieceBehaviour = pieceBehaviour;
-        squareBehaviour = StaticData.squaresBehaviourScripts[i, j];
-        squareBehaviour.isOccupied = true;
+        pieceBehaviour.attachedSquareBehaviour = StaticData.squaresBehaviourScripts[i, j];
+        pieceBehaviour.attachedSquareBehaviour.isOccupied = true;
     }
 }
