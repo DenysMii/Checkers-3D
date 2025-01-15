@@ -16,7 +16,7 @@ public class BoardGenerator : MonoBehaviour
     [SerializeField] private GameObject whiteKingPrefab;
     [SerializeField] private GameObject blackKingPrefab;
 
-    public void SetSquareObjects()
+    public void SetSquares()
     {
         Transform[] squares = squaresHolder.GetComponentsInChildren<Transform>();
         int squaresCounter = 1;
@@ -25,9 +25,9 @@ public class BoardGenerator : MonoBehaviour
         {
             for (int j = i % 2; j < 8; j += 2)
             {
-                SquareBehaviour newSquareBehaviour = squares[squaresCounter].gameObject.AddComponent<SquareBehaviour>();
-                newSquareBehaviour.boardPos = new int[2] { i, j };
-                StaticData.squaresBehaviourScripts[i, j] = newSquareBehaviour;
+                SquareBehaviour newSquare = squares[squaresCounter].gameObject.AddComponent<SquareBehaviour>();
+                newSquare.boardPos = new int[2] { i, j };
+                StaticData.squares[i, j] = newSquare;
 
                 squaresCounter++;
             }
@@ -50,9 +50,7 @@ public class BoardGenerator : MonoBehaviour
     {
         if (pieceNumber == 0) return;
 
-        Vector3 localPos = new Vector3(startPos + j * squaresDiff, 0, startPos + i * squaresDiff);
         GameObject newPiece;
-
         switch (pieceNumber)
         {
             case 1:
@@ -76,17 +74,18 @@ public class BoardGenerator : MonoBehaviour
                 break;
         }
 
+        Vector3 localPos = new Vector3(startPos + j * squaresDiff, 0, startPos + i * squaresDiff);
         newPiece.transform.SetLocalPositionAndRotation(localPos, newPiece.transform.rotation);
 
-        PieceBehaviour newPieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
-        newPieceBehaviour.squaresHighlighter = squaresHighlighter;
-        SetSquareBehavoiur(newPieceBehaviour, i, j);
+        PieceBehaviour newPieceScript = newPiece.GetComponent<PieceBehaviour>();
+        newPieceScript.squaresHighlighter = squaresHighlighter;
+        SetSquareBehavoiur(newPieceScript, i, j);
         
     }
 
     private void SetSquareBehavoiur(PieceBehaviour pieceBehaviour, int i, int j )
     {
-        pieceBehaviour.attachedSquareBehaviour = StaticData.squaresBehaviourScripts[i, j];
-        pieceBehaviour.attachedSquareBehaviour.isOccupied = true;
+        pieceBehaviour.attachedSquare = StaticData.squares[i, j];
+        pieceBehaviour.attachedSquare.isOccupied = true;
     }
 }

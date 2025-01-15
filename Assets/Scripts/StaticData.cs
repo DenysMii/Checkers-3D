@@ -4,6 +4,8 @@ public static class StaticData
 {
     public static bool firstPlay = true;
     public static bool isWhiteTurn = true;
+    public static bool animationsOn = true;
+    public static Material blackSquareMaterial;
 
     public static short[,] piecesStartingPos =
     {
@@ -22,8 +24,17 @@ public static class StaticData
     // 4 - black kings
     // 0 - empty
 
-    public static SquareBehaviour[,] squaresBehaviourScripts = new SquareBehaviour[8, 8];
-    public static Material blackSquareMaterial;
+    public static SquareBehaviour[,] squares = new SquareBehaviour[8, 8];
+
+    public static SquareBehaviour GetSquare(int[] squareBPos)
+    {
+        int i = squareBPos[0];
+        int j = squareBPos[1];
+
+        if (i < 0 || i > 7 || j < 0 || j > 7) return null;
+        return squares[i, j];
+    }
+
 }
 
 public enum HighlightStatus

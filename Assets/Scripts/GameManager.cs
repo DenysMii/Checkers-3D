@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     {
         if(boardGenerator != null)
         {
-            boardGenerator.SetSquareObjects();
+            boardGenerator.SetSquares();
             boardGenerator.GeneratePiecesFromStaticData();
 
         }

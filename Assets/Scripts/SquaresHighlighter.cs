@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class SquaresHighlighter : MonoBehaviour
@@ -17,7 +16,8 @@ public class SquaresHighlighter : MonoBehaviour
         int highlightedSquares = 0;
         foreach (var squareBPos in squaresBPos)
         {
-            if (!GetSquareBehaviour(squareBPos).isOccupied)
+            SquareBehaviour square = StaticData.GetSquare(squareBPos);
+            if (square != null && !square.isOccupied)
                 highlightedSquares++;
         }
         return highlightedSquares;
@@ -26,14 +26,20 @@ public class SquaresHighlighter : MonoBehaviour
     public void HighlightSquares(PieceBehaviour piece, HighlightStatus highlightStatus)
     {
         ClearHighlightedSquares();
+        if (currentPiece == piece)
+        {
+            currentPiece = null;
+            return;
+        }
+        
         currentPiece = piece;
-        currentPieceBPos = piece.attachedSquareBehaviour.boardPos;
+        currentPieceBPos = piece.attachedSquare.boardPos;
 
-        GetSquareBehaviour(currentPieceBPos).HighlightSquare(pressedSquare, HighlightStatus.Pressed);
+        StaticData.GetSquare(currentPieceBPos).HighlightSquare(pressedSquare, HighlightStatus.Pressed);
         foreach (var squareBPos in piece.highlightedSquaresBPos)
         {
-            SquareBehaviour squareBehaviour = GetSquareBehaviour(squareBPos);
-            if (squareBehaviour != null && !squareBehaviour.isOccupied)
+            SquareBehaviour square = StaticData.GetSquare(squareBPos);
+            if (square != null && !square.isOccupied)
             {
                 Material materialToHighlight;
                 switch(highlightStatus)
@@ -51,34 +57,27 @@ public class SquaresHighlighter : MonoBehaviour
                         materialToHighlight = StaticData.blackSquareMaterial;
                         break;
                 }
-                GetSquareBehaviour(squareBPos).HighlightSquare(materialToHighlight, highlightStatus);
+                square.HighlightSquare(materialToHighlight, highlightStatus);
+                square.currentPressedPiece = currentPiece;
             }
-                
         }
             
     }
 
-    private void ClearHighlightedSquares()
+    public void ClearHighlightedSquares()
     {
         if(currentPiece != null)
         {
-            GetSquareBehaviour(currentPieceBPos).HighlightSquare(StaticData.blackSquareMaterial, HighlightStatus.NotHighlighted);
+            StaticData.GetSquare(currentPieceBPos).HighlightSquare(StaticData.blackSquareMaterial, HighlightStatus.NotHighlighted);
             foreach (var squareBPos in currentPiece.highlightedSquaresBPos)
             {
-                SquareBehaviour squareBehaviour = GetSquareBehaviour(squareBPos);
-                if(squareBehaviour != null)
-                    GetSquareBehaviour(squareBPos).HighlightSquare(StaticData.blackSquareMaterial, HighlightStatus.NotHighlighted);
+                SquareBehaviour square = StaticData.GetSquare(squareBPos);
+                if(square != null)
+                {
+                    square.HighlightSquare(StaticData.blackSquareMaterial, HighlightStatus.NotHighlighted);
+                    square.currentPressedPiece = currentPiece;
+                }
             }
-                
         }
-    }
-
-    private SquareBehaviour GetSquareBehaviour(int[] squareBPos)
-    {
-        int i = squareBPos[0];
-        int j = squareBPos[1];
-
-        if(i < 0 || i > 7 || j < 0 || j > 7) return null;
-        return StaticData.squaresBehaviourScripts[i, j];
     }
 }
