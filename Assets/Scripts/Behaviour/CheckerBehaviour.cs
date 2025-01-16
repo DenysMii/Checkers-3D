@@ -13,13 +13,27 @@ public class CheckerBehaviour : PieceBehaviour
         };
     }
 
-    protected override void SetCaptureHighlightSquaresBPos()
+    public override void SetCaptureHighlightSquaresBPos()
     {
         highlightedSquaresBPos = new List<int[]>();
+        SetCaptureSquaresBPos();
+        foreach (var captureSquareBPos in captureSquaresBPos)
+        {
+            int[] negAttachedSquareBPos = CoordsMult(attachedSquare.boardPos, -1);
+            int[] squaresDiff = CoordsSum(captureSquareBPos, negAttachedSquareBPos);
+            int[] highlightedSquareBPos = CoordsSum(squaresDiff, captureSquareBPos);
+            highlightedSquaresBPos.Add(highlightedSquareBPos);
+        }
+    }
+
+    protected override void SetCaptureSquaresBPos()
+    {
+        captureSquaresBPos = new List<int[]>();
         foreach (var squareDir in squaresDir)
         {
             SquareBehaviour square = StaticData.GetSquare(CoordsSum(attachedSquare.boardPos, squareDir));
-            //if(square != null && square.isOccupied && square)
+            if (square != null && square.isOccupied && square.attachedPiece.isWhite != isWhite)
+                captureSquaresBPos.Add(square.boardPos);
         }
     }
 

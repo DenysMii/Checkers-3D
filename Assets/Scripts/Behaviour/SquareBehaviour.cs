@@ -6,11 +6,10 @@ public class SquareBehaviour : MonoBehaviour, IPointerClickHandler
     public int[] boardPos { get; set; }
     public bool isOccupied { get; set; }
 
+    public PieceBehaviour attachedPiece { get; set; }
     public PieceBehaviour currentPressedPiece { private get; set; }
 
     private HighlightStatus highlightStatus;
-
-    
     private Renderer squareRenderer;
     
     private void Start()
@@ -23,12 +22,12 @@ public class SquareBehaviour : MonoBehaviour, IPointerClickHandler
     {
         switch(highlightStatus)
         {
-            case HighlightStatus.NotHighlighted:
-                break;
             case HighlightStatus.ToMove:
                 currentPressedPiece.MoveToNewSquare(this);
                 break;
             case HighlightStatus.ToCapture:
+                currentPressedPiece.CaptureOpponentPiece(this);
+                currentPressedPiece.MoveToNewSquare(this, true);
                 break;
             case HighlightStatus.ToMoveIntoKing:
                 break;

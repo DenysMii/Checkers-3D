@@ -34,7 +34,7 @@ public class BoardGenerator : MonoBehaviour
         }
     }
 
-    public void GeneratePiecesFromStaticData()
+    public void GeneratePieces()
     {
         short[,] piecesPos = StaticData.piecesStartingPos;
         for(int i = 0; i < 8; i++)
@@ -78,7 +78,6 @@ public class BoardGenerator : MonoBehaviour
         newPiece.transform.SetLocalPositionAndRotation(localPos, newPiece.transform.rotation);
 
         PieceBehaviour newPieceScript = newPiece.GetComponent<PieceBehaviour>();
-        newPieceScript.squaresHighlighter = squaresHighlighter;
         SetSquareBehavoiur(newPieceScript, i, j);
         
     }
@@ -87,5 +86,6 @@ public class BoardGenerator : MonoBehaviour
     {
         pieceBehaviour.attachedSquare = StaticData.squares[i, j];
         pieceBehaviour.attachedSquare.isOccupied = true;
+        pieceBehaviour.attachedSquare.attachedPiece = pieceBehaviour;
     }
 }

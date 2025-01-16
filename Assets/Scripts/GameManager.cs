@@ -1,30 +1,38 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private BoardGenerator boardGenerator;
     [SerializeField] private PlayerPrefsLoader playerPrefsLoader;
-    [SerializeField] private string debugSceneName;
+    [SerializeField] private SquaresHighlighter squaresHighlighter;
+    [SerializeField] private TurnsManager turnsManager;
 
     private void Start()
     {
-        if(boardGenerator != null)
-        {
-            boardGenerator.SetSquares();
-            boardGenerator.GeneratePiecesFromStaticData();
+        boardGenerator.SetSquares();
+        boardGenerator.GeneratePieces();
 
-        }
+        playerPrefsLoader.LoadPlayerPrefs();
+        
+        StaticData.squaresHighlighter = squaresHighlighter;
+        StaticData.turnsManager = turnsManager;
 
-        if(playerPrefsLoader != null)
-            playerPrefsLoader.LoadPlayerPrefs();
+        turnsManager.CheckForCaptures();
+
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            SceneManager.LoadScene(debugSceneName);
-        }
-    }
+    
+
+    //public void CheckTime()
+    //{
+    //    var timer = Time.realtimeSinceStartup;
+    //    CheckForCaptureLinq();
+    //    print ("Linq " + (Time.realtimeSinceStartup - timer).ToString("f6"));
+
+    //    timer = Time.realtimeSinceStartup;
+    //    CheckForCapture();
+    //    print("Default " + (Time.realtimeSinceStartup - timer).ToString("f6"));
+    //}
 }

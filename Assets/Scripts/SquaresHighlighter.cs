@@ -11,22 +11,22 @@ public class SquaresHighlighter : MonoBehaviour
     private PieceBehaviour currentPiece;
     private int[] currentPieceBPos;
 
-    public int GetHighlightedCellsCount(List<int[]> squaresBPos)
+    public int GetHighlightedSquaresCount(List<int[]> squaresBPos)
     {
-        int highlightedSquares = 0;
+        int squaresCount = 0;
         foreach (var squareBPos in squaresBPos)
         {
             SquareBehaviour square = StaticData.GetSquare(squareBPos);
             if (square != null && !square.isOccupied)
-                highlightedSquares++;
+                squaresCount++;
         }
-        return highlightedSquares;
+        return squaresCount;
     }
 
     public void HighlightSquares(PieceBehaviour piece, HighlightStatus highlightStatus)
     {
         ClearHighlightedSquares();
-        if (currentPiece == piece)
+        if (currentPiece == piece && currentPieceBPos == piece.attachedSquare.boardPos)
         {
             currentPiece = null;
             return;
@@ -80,4 +80,7 @@ public class SquaresHighlighter : MonoBehaviour
             }
         }
     }
+
+    
+
 }
