@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class TurnsManager : MonoBehaviour
 {
+    [SerializeField] private CameraAnimations cameraAnimations;
 
     public void CheckForCaptures()
     {
@@ -25,6 +27,7 @@ public class TurnsManager : MonoBehaviour
 
     public void SwitchTurn()
     {
+        cameraAnimations.SwitchCamera();
         StaticData.isWhiteTurn = !StaticData.isWhiteTurn;
         CheckForCaptures();
     }

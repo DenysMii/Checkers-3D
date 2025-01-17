@@ -3,7 +3,6 @@ using UnityEngine;
 public static class StaticData
 {
     public static bool firstPlay = true;
-    public static bool animationsOn = true;
 
     public static bool isWhiteTurn = true;
     public static bool isObligatedToCapture = false;

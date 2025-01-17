@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class PieceBehaviour : MonoBehaviour, IPointerClickHandler
+public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] public bool isWhite;
 
@@ -26,9 +26,9 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerClickHandler
         moveDirection = isWhite ? 1 : -1;
     }
 
-    public void OnPointerClick(PointerEventData pointerEventData)
+    public void OnPointerDown(PointerEventData pointerEventData)
     {
-        if (isWhite == StaticData.isWhiteTurn)
+        if (isWhite == StaticData.isWhiteTurn && pointerEventData.button == PointerEventData.InputButton.Left)
             HighlightPossibleSquares();
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SquareBehaviour : MonoBehaviour, IPointerClickHandler
+public class SquareBehaviour : MonoBehaviour, IPointerDownHandler
 {
     public int[] boardPos { get; set; }
     public bool isOccupied { get; set; }
@@ -18,21 +18,24 @@ public class SquareBehaviour : MonoBehaviour, IPointerClickHandler
         squareRenderer = gameObject.GetComponent<Renderer>();
     }
 
-    public void OnPointerClick(PointerEventData pointerEventData)
+    public void OnPointerDown(PointerEventData pointerEventData)
     {
-        switch(highlightStatus)
+        if(pointerEventData.button == PointerEventData.InputButton.Left)
         {
-            case HighlightStatus.ToMove:
-                currentPressedPiece.MoveToNewSquare(this);
-                break;
-            case HighlightStatus.ToCapture:
-                currentPressedPiece.CaptureOpponentPiece(this);
-                currentPressedPiece.MoveToNewSquare(this, true);
-                break;
-            case HighlightStatus.ToMoveIntoKing:
-                break;
-            case HighlightStatus.ToCaptureInKing:
-                break;
+            switch (highlightStatus)
+            {
+                case HighlightStatus.ToMove:
+                    currentPressedPiece.MoveToNewSquare(this);
+                    break;
+                case HighlightStatus.ToCapture:
+                    currentPressedPiece.CaptureOpponentPiece(this);
+                    currentPressedPiece.MoveToNewSquare(this, true);
+                    break;
+                case HighlightStatus.ToMoveIntoKing:
+                    break;
+                case HighlightStatus.ToCaptureInKing:
+                    break;
+            }
         }
     }
 
