@@ -1,8 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static CoordsOperations;
 
 public class CheckerBehaviour : PieceBehaviour
 {
+    private int moveDirection;
+
+    protected virtual void Start()
+    {
+        moveDirection = isWhite ? 1 : -1;
+    }
+
     protected override void SetMoveHighlightSquaresBPos()
     {
         int squaresDirIndex = isWhite ? 0 : 2;
@@ -11,19 +19,6 @@ public class CheckerBehaviour : PieceBehaviour
             CoordsSum(attachedSquare.boardPos, squaresDir[squaresDirIndex]),
             CoordsSum(attachedSquare.boardPos, squaresDir[squaresDirIndex + 1])
         };
-    }
-
-    public override void SetCaptureHighlightSquaresBPos()
-    {
-        highlightedSquaresBPos = new List<int[]>();
-        SetCaptureSquaresBPos();
-        foreach (var captureSquareBPos in captureSquaresBPos)
-        {
-            int[] negAttachedSquareBPos = CoordsMult(attachedSquare.boardPos, -1);
-            int[] squaresDiff = CoordsSum(captureSquareBPos, negAttachedSquareBPos);
-            int[] highlightedSquareBPos = CoordsSum(squaresDiff, captureSquareBPos);
-            highlightedSquaresBPos.Add(highlightedSquareBPos);
-        }
     }
 
     protected override void SetCaptureSquaresBPos()

@@ -27,6 +27,16 @@ public class BoardGenerator : MonoBehaviour
             {
                 SquareBehaviour newSquare = squares[squaresCounter].gameObject.AddComponent<SquareBehaviour>();
                 newSquare.boardPos = new int[2] { i, j };
+                if(i == 0)
+                {
+                    newSquare.isKingPromoteSquare = true;
+                    newSquare.promoteForWhite = false;
+                }
+                else if (i == 7)
+                {
+                    newSquare.isKingPromoteSquare = true;
+                    newSquare.promoteForWhite = true;
+                }
                 StaticData.squares[i, j] = newSquare;
 
                 squaresCounter++;
@@ -87,5 +97,25 @@ public class BoardGenerator : MonoBehaviour
         pieceBehaviour.attachedSquare = StaticData.squares[i, j];
         pieceBehaviour.attachedSquare.isOccupied = true;
         pieceBehaviour.attachedSquare.attachedPiece = pieceBehaviour;
+    }
+
+    public void PromoteChecker(CheckerBehaviour checkerBehaviour, SquareBehaviour square)
+    {
+        GameObject piecesHolder = checkerBehaviour.isWhite ? whitePiecesHolder : blackPiecesHolder;
+        GameObject kingPrefab = checkerBehaviour.isWhite ? whiteKingPrefab : blackKingPrefab;
+        GameObject oldChecker = checkerBehaviour.gameObject;
+
+        GameObject newKing = Instantiate(kingPrefab, oldChecker.transform.position, kingPrefab.transform.rotation, piecesHolder.transform);
+        newKing.name = oldChecker.name.Replace("Checker", "King");
+
+        KingBehaviour newKingBehaviour = newKing.GetComponent<KingBehaviour>();
+        newKingBehaviour.attachedSquare = square;
+        square.attachedPiece = newKingBehaviour;
+
+        checkerBehaviour.isDestroyed = true;
+        Destroy(oldChecker);
+
+        if (newKingBehaviour.IsPossibleToCapture())
+            StaticData.isObligatedToCapture = true;
     }
 }

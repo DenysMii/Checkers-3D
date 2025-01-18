@@ -5,29 +5,29 @@ using UnityEngine;
 public class TurnsManager : MonoBehaviour
 {
     [SerializeField] private CameraAnimations cameraAnimations;
+    [SerializeField] private GameObject whitePiecesHolder;
+    [SerializeField] private GameObject blackPiecesHolder;
 
     public void CheckForCaptures()
     {
-        SquareBehaviour[,] squares = StaticData.squares;
-        foreach (var square in squares)
+        GameObject pieceHolder = StaticData.isWhiteTurn ? whitePiecesHolder : blackPiecesHolder;
+        PieceBehaviour[] currentPieces = pieceHolder.GetComponentsInChildren<PieceBehaviour>();
+
+        foreach(PieceBehaviour piece in currentPieces)
         {
-            if (square != null && square.isOccupied && square.attachedPiece.isWhite == StaticData.isWhiteTurn)
+            if(piece.IsPossibleToCapture() && !piece.isDestroyed)
             {
-                square.attachedPiece.SetCaptureHighlightSquaresBPos();
-                List<int[]> highlightedSquaresBPos = square.attachedPiece.highlightedSquaresBPos;
-                if (StaticData.squaresHighlighter.GetHighlightedSquaresCount(highlightedSquaresBPos) > 0)
-                {
-                    StaticData.isObligatedToCapture = true;
-                    return;
-                }
+                StaticData.isObligatedToCapture = true;
+                return;
             }
         }
+        
         StaticData.isObligatedToCapture = false;
     }
 
     public void SwitchTurn()
     {
-        cameraAnimations.SwitchCamera();
+        cameraAnimations.SwitchCamera(); 
         StaticData.isWhiteTurn = !StaticData.isWhiteTurn;
         CheckForCaptures();
     }

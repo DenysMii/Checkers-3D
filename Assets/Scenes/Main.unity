@@ -7871,6 +7871,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraAnimations: {fileID: 127353479}
+  whitePiecesHolder: {fileID: 2071134986}
+  blackPiecesHolder: {fileID: 1950691328}
 --- !u!1 &1475811274
 GameObject:
   m_ObjectHideFlags: 0

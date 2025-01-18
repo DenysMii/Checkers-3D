@@ -42,21 +42,15 @@ public class SquaresHighlighter : MonoBehaviour
             if (square != null && !square.isOccupied)
             {
                 Material materialToHighlight;
-                switch(highlightStatus)
-                {
-                    case HighlightStatus.ToMove:
-                        materialToHighlight = greenSquare;
-                        break;
-                    case HighlightStatus.ToCapture:
-                        materialToHighlight = redSquare;
-                        break;
-                    case HighlightStatus.ToCaptureInKing: case HighlightStatus.ToMoveIntoKing:
-                        materialToHighlight = yellowSquare;
-                        break;
-                    default:
-                        materialToHighlight = StaticData.blackSquareMaterial;
-                        break;
-                }
+                if (square.isKingPromoteSquare && currentPiece is CheckerBehaviour)
+                    materialToHighlight = yellowSquare;
+                else if (highlightStatus == HighlightStatus.ToMove)
+                    materialToHighlight = greenSquare;
+                else if (highlightStatus == HighlightStatus.ToCapture)
+                    materialToHighlight = redSquare;
+                else
+                    materialToHighlight = StaticData.blackSquareMaterial;
+
                 square.HighlightSquare(materialToHighlight, highlightStatus);
                 square.currentPressedPiece = currentPiece;
             }
