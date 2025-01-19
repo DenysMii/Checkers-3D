@@ -2,24 +2,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameInitializer : MonoBehaviour
 {
     [SerializeField] private BoardGenerator boardGenerator;
     [SerializeField] private PlayerPrefsLoader playerPrefsLoader;
     [SerializeField] private SquaresHighlighter squaresHighlighter;
     [SerializeField] private TurnsManager turnsManager;
+    [SerializeField] private AnimationsManager animationsManager;
 
     private void Start()
     {
-        boardGenerator.SetSquares();
-        boardGenerator.GeneratePieces();
-        playerPrefsLoader.LoadPlayerPrefs();
-        
-
+        StaticData.isWhiteTurn = true;
         StaticData.boardGenerator = boardGenerator;
         StaticData.squaresHighlighter = squaresHighlighter;
         StaticData.turnsManager = turnsManager;
-        
+        StaticData.animationsManager = animationsManager;
+
+        boardGenerator.SetSquares();
+        boardGenerator.GeneratePieces();
+        playerPrefsLoader.LoadPlayerPrefs();
         turnsManager.CheckForCaptures();
     }
 

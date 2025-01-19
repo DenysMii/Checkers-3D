@@ -7,6 +7,7 @@ using static CoordsOperations;
 public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] public bool isWhite;
+    [SerializeField] private float movePieceDuration;
 
     public bool isDestroyed { get; set; }
     public List<int[]> highlightedSquaresBPos { get; protected set; }
@@ -30,6 +31,12 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
     public bool IsPossibleToCapture()
     {
         SetCaptureHighlightSquaresBPos();
+        return StaticData.squaresHighlighter.GetHighlightedSquaresCount(highlightedSquaresBPos) > 0;
+    }
+
+    public bool IsPossibleToMove()
+    {
+        SetMoveHighlightSquaresBPos();
         return StaticData.squaresHighlighter.GetHighlightedSquaresCount(highlightedSquaresBPos) > 0;
     }
 
@@ -63,10 +70,8 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
         newSquare.currentPressedPiece = null;
         attachedSquare = newSquare;
 
-        Vector3 localPos = new Vector3(newSquare.transform.position.x, 0, newSquare.transform.position.z);
-        transform.SetLocalPositionAndRotation(localPos, transform.rotation);
-
-        
+        Vector3 targetPos = new Vector3(newSquare.transform.position.x, 0, newSquare.transform.position.z);
+        StaticData.animationsManager.MovePiece(transform, targetPos, movePieceDuration);
     }
 
     public void CaptureOpponentPiece(SquareBehaviour newSquare)

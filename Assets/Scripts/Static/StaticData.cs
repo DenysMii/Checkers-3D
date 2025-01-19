@@ -11,6 +11,7 @@ public static class StaticData
     public static BoardGenerator boardGenerator;
     public static SquaresHighlighter squaresHighlighter;
     public static TurnsManager turnsManager;
+    public static AnimationsManager animationsManager;
 
 
     public static short[,] piecesStartingPos =
@@ -24,6 +25,8 @@ public static class StaticData
         { 2, 0, 2, 0, 2, 0, 2, 0 },
         { 0, 2, 0, 2, 0, 2, 0, 2 }
     };
+
+
     // 1 - white pieces
     // 2 - black pieces
     // 3 - white kings

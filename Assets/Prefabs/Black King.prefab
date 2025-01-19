@@ -205,3 +205,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 0
+  movePieceDuration: 1

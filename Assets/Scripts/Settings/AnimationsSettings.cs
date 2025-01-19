@@ -7,7 +7,6 @@ public class AnimationsSettings : MonoBehaviour
     const string ANIM_PREF_NAME = "Animations";
 
     [SerializeField] private Toggle animationsToggle;
-    [SerializeField] private CameraAnimations cameraAnimations;
 
     public void LoadSettings()
     {
@@ -27,13 +26,13 @@ public class AnimationsSettings : MonoBehaviour
     private void PlayerPrefsSetAnimations()
     {
         animationsToggle.isOn = PlayerPrefs.GetInt(ANIM_PREF_NAME) == 1;
-        cameraAnimations.SetAnimations(animationsToggle.isOn);
+        StaticData.animationsManager.SetAnimationsState(animationsToggle.isOn);
     }
 
     public void ToggleSetAnimations(bool isOn)
     {
         int toggleInt = isOn ? 1 : 0;
-        cameraAnimations.SetAnimations(isOn);
+        StaticData.animationsManager.SetAnimationsState(isOn);
         PlayerPrefs.SetInt(ANIM_PREF_NAME, toggleInt);
     }
 }

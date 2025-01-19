@@ -3,9 +3,6 @@ using UnityEditor;
 
 public class BoardGenerator : MonoBehaviour
 {
-    [SerializeField] private float startPos;
-    [SerializeField] private float squaresDiff;
-
     [SerializeField] private SquaresHighlighter squaresHighlighter;
     [SerializeField] private GameObject squaresHolder;
     [SerializeField] private GameObject whitePiecesHolder;
@@ -15,6 +12,9 @@ public class BoardGenerator : MonoBehaviour
     [SerializeField] private GameObject blackCheckerPrefab;
     [SerializeField] private GameObject whiteKingPrefab;
     [SerializeField] private GameObject blackKingPrefab;
+
+    private float startPos = -7;
+    private float squaresDiff = 2;
 
     public void SetSquares()
     {

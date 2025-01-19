@@ -6,7 +6,7 @@ public class SquareBehaviour : MonoBehaviour, IPointerDownHandler
     public int[] boardPos { get; set; }
     public bool isOccupied { get; set; }
     public bool isKingPromoteSquare { get; set; }
-    public bool promoteForWhite { private get; set; }
+    public bool promoteForWhite { get; set; }
 
     public PieceBehaviour attachedPiece { get; set; }
     public PieceBehaviour currentPressedPiece { private get; set; }
@@ -38,13 +38,17 @@ public class SquareBehaviour : MonoBehaviour, IPointerDownHandler
                     break;
             }
 
-            if (highlightTemp != HighlightStatus.NotHighlighted && isKingPromoteSquare &&
-                attachedPiece.isWhite == promoteForWhite && attachedPiece is CheckerBehaviour)
+            if (highlightTemp != HighlightStatus.NotHighlighted)
             {
-                CheckerBehaviour attachedChecker = attachedPiece as CheckerBehaviour;
-                StaticData.boardGenerator.PromoteChecker(attachedChecker, this);
+                if(isKingPromoteSquare && attachedPiece.isWhite == promoteForWhite && attachedPiece is CheckerBehaviour)
+                {
+                    CheckerBehaviour attachedChecker = attachedPiece as CheckerBehaviour;
+                    StaticData.boardGenerator.PromoteChecker(attachedChecker, this);
+                }
+                SwitchTurn(isCapturing);
             }
-            SwitchTurn(isCapturing);
+
+            
         }
     }
 

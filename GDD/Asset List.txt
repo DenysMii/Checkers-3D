@@ -15,6 +15,7 @@ Animations:
 • Rotate board
 • Checker capture
 • King capture
+• Press Button
 
 Textures/Materials:
 • Green square
