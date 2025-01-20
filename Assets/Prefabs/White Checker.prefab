@@ -56,13 +56,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: White Checker
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b7549b8a0c19f1641a3c712763c82ba4, type: 3}
+      propertyPath: m_TagString
+      value: Piece
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7549b8a0c19f1641a3c712763c82ba4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2055986889208049158}
+      addedObject: {fileID: 378025496094048181}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7549b8a0c19f1641a3c712763c82ba4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3080164945880999875}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7549b8a0c19f1641a3c712763c82ba4, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1472752982211411752}
@@ -72,8 +79,35 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b7549b8a0c19f1641a3c712763c82ba4, type: 3}
   m_PrefabInstance: {fileID: 4093608530742632681}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2055986889208049158
-BoxCollider:
+--- !u!54 &378025496094048181
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750938378357530040}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!64 &3080164945880999875
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,9 +124,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.9871905, y: 1.987191, z: 0.40000015}
-  m_Center: {x: -0.000000029802322, y: -0.00000002980233, z: -0.20000005}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4287172695064091271, guid: 595a941ea0a849f4d92cd0ec4f21e918, type: 3}
 --- !u!114 &-1472752982211411752
 MonoBehaviour:
   m_ObjectHideFlags: 0

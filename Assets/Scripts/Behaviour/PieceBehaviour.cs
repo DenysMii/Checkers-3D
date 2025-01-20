@@ -57,7 +57,7 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
         StaticData.squaresHighlighter.HighlightSquares(this, highlightStatus);
     }
 
-    public void MoveToNewSquare(SquareBehaviour newSquare)
+    public void MoveToNewSquare(SquareBehaviour newSquare, bool isCapturing = false)
     {
         StaticData.squaresHighlighter.ClearHighlightedSquares();
 
@@ -71,7 +71,7 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
         attachedSquare = newSquare;
 
         Vector3 targetPos = new Vector3(newSquare.transform.position.x, 0, newSquare.transform.position.z);
-        StaticData.animationsManager.MovePiece(transform, targetPos, movePieceDuration);
+        StaticData.animationsManager.MovePiece(transform, targetPos, movePieceDuration, isCapturing);
     }
 
     public void CaptureOpponentPiece(SquareBehaviour newSquare)
@@ -83,8 +83,9 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
         };
 
         SquareBehaviour squareWithOpponent = StaticData.GetSquare(opponentPieceBPos);
+        
         squareWithOpponent.attachedPiece.isDestroyed = true;
-        Destroy(squareWithOpponent.attachedPiece.gameObject);
+        StaticData.animationsManager.DestroyPiece(squareWithOpponent.attachedPiece.gameObject);
 
         squareWithOpponent.isOccupied = false;
         squareWithOpponent.attachedPiece = null;

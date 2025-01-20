@@ -24,8 +24,15 @@ public class SquareBehaviour : MonoBehaviour, IPointerDownHandler
     {
         if(pointerEventData.button == PointerEventData.InputButton.Left)
         {
-            HighlightStatus highlightTemp = highlightStatus;
-            bool isCapturing = false;
+            if (highlightStatus != HighlightStatus.NotHighlighted)
+            {
+                if (isKingPromoteSquare && currentPressedPiece.isWhite == promoteForWhite && currentPressedPiece is CheckerBehaviour)
+                {
+                    CheckerBehaviour currentChecker = currentPressedPiece as CheckerBehaviour;
+                    currentPressedPiece = StaticData.boardGenerator.PromoteChecker(currentChecker);
+                }
+            }
+
             switch (highlightStatus)
             {
                 case HighlightStatus.ToMove:
@@ -33,32 +40,11 @@ public class SquareBehaviour : MonoBehaviour, IPointerDownHandler
                     break;
                 case HighlightStatus.ToCapture:
                     currentPressedPiece.CaptureOpponentPiece(this);
-                    currentPressedPiece.MoveToNewSquare(this);
-                    isCapturing = true;
+                    currentPressedPiece.MoveToNewSquare(this, true);
                     break;
             }
 
-            if (highlightTemp != HighlightStatus.NotHighlighted)
-            {
-                if(isKingPromoteSquare && attachedPiece.isWhite == promoteForWhite && attachedPiece is CheckerBehaviour)
-                {
-                    CheckerBehaviour attachedChecker = attachedPiece as CheckerBehaviour;
-                    StaticData.boardGenerator.PromoteChecker(attachedChecker, this);
-                }
-                SwitchTurn(isCapturing);
-            }
-
-            
         }
-    }
-
-    private void SwitchTurn(bool isCapturing)
-    {
-        if (isCapturing)
-            StaticData.turnsManager.CheckForCaptures();
-
-        if (!StaticData.isObligatedToCapture)
-            StaticData.turnsManager.SwitchTurn();
     }
 
     public void HighlightSquare(Material material, HighlightStatus status)

@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Black King
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
+      propertyPath: m_TagString
+      value: Piece
+      objectReference: {fileID: 0}
     - target: {fileID: 4567408375802172189, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -156,7 +160,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4177623057411721398}
+      addedObject: {fileID: 3392204784198478693}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 658234087049273540}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5082105874764258695}
@@ -171,8 +178,35 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
   m_PrefabInstance: {fileID: 7441052528222768557}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4177623057411721398
-BoxCollider:
+--- !u!54 &3392204784198478693
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746899481067565308}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!64 &658234087049273540
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -189,9 +223,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: -0.5}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3880671198093009630, guid: a96347ebca2ac0a4eb6badec103ab361, type: 3}
 --- !u!114 &-5082105874764258695
 MonoBehaviour:
   m_ObjectHideFlags: 0

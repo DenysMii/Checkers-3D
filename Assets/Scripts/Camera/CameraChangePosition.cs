@@ -7,13 +7,11 @@ public class CameraChangePosition : MonoBehaviour
     [Header("Target Object")]
     [SerializeField] private Transform target;
 
-    [Space(10)]
     [Header("Sensitivity")]
     [SerializeField] private float verticalRotationSensitivity;
     [SerializeField] private float horizontalRotationSensitivity;
     [SerializeField] private float zoomSensitivity;
 
-    [Space(10)]
     [Header("Rotation")]
     [SerializeField] private float minVerticalAngle;
     [SerializeField] private float maxVerticalAngle;
@@ -21,7 +19,6 @@ public class CameraChangePosition : MonoBehaviour
     [SerializeField] private float minHorizontalAngle;
     [SerializeField] private float maxHorizontalAngle;
 
-    [Space(10)]
     [Header("Distance")]
     [SerializeField] private float startDistance;
     [SerializeField] private float minDistance;

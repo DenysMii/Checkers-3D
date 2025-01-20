@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameInitializer : MonoBehaviour
 {
+    [SerializeField] private Button playButton;
     [SerializeField] private BoardGenerator boardGenerator;
     [SerializeField] private PlayerPrefsLoader playerPrefsLoader;
     [SerializeField] private SquaresHighlighter squaresHighlighter;
@@ -13,10 +15,14 @@ public class GameInitializer : MonoBehaviour
     private void Start()
     {
         StaticData.isWhiteTurn = true;
+
         StaticData.boardGenerator = boardGenerator;
         StaticData.squaresHighlighter = squaresHighlighter;
         StaticData.turnsManager = turnsManager;
         StaticData.animationsManager = animationsManager;
+
+        if (!StaticData.firstPlay)
+            playButton.onClick.Invoke();
 
         boardGenerator.SetSquares();
         boardGenerator.GeneratePieces();

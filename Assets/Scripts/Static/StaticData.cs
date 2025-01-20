@@ -27,6 +27,10 @@ public static class StaticData
     };
 
 
+
+
+
+
     // 1 - white pieces
     // 2 - black pieces
     // 3 - white kings

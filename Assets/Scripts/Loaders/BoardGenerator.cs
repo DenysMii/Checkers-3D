@@ -3,11 +3,12 @@ using UnityEditor;
 
 public class BoardGenerator : MonoBehaviour
 {
-    [SerializeField] private SquaresHighlighter squaresHighlighter;
+    [Header("GameObjects Holders")]
     [SerializeField] private GameObject squaresHolder;
     [SerializeField] private GameObject whitePiecesHolder;
     [SerializeField] private GameObject blackPiecesHolder;
 
+    [Header("Prefabs")]
     [SerializeField] private GameObject whiteCheckerPrefab;
     [SerializeField] private GameObject blackCheckerPrefab;
     [SerializeField] private GameObject whiteKingPrefab;
@@ -99,7 +100,7 @@ public class BoardGenerator : MonoBehaviour
         pieceBehaviour.attachedSquare.attachedPiece = pieceBehaviour;
     }
 
-    public void PromoteChecker(CheckerBehaviour checkerBehaviour, SquareBehaviour square)
+    public KingBehaviour PromoteChecker(CheckerBehaviour checkerBehaviour)
     {
         GameObject piecesHolder = checkerBehaviour.isWhite ? whitePiecesHolder : blackPiecesHolder;
         GameObject kingPrefab = checkerBehaviour.isWhite ? whiteKingPrefab : blackKingPrefab;
@@ -109,13 +110,15 @@ public class BoardGenerator : MonoBehaviour
         newKing.name = oldChecker.name.Replace("Checker", "King");
 
         KingBehaviour newKingBehaviour = newKing.GetComponent<KingBehaviour>();
-        newKingBehaviour.attachedSquare = square;
-        square.attachedPiece = newKingBehaviour;
+        newKingBehaviour.attachedSquare = checkerBehaviour.attachedSquare;
+        newKingBehaviour.attachedSquare.attachedPiece = newKingBehaviour;
 
         checkerBehaviour.isDestroyed = true;
         Destroy(oldChecker);
 
         if (newKingBehaviour.IsPossibleToCapture())
             StaticData.isObligatedToCapture = true;
+
+        return newKingBehaviour;
     }
 }

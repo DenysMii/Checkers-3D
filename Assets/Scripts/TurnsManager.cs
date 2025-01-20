@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,20 @@ public class TurnsManager : MonoBehaviour
     private int drawCounter = 41;
 
     private bool isGameEnded = false;
+    private void Start()
+    {
+        StaticData.animationsManager.OnPieceMovementFinished += CheckForSwitchTurn;
+    }
+
+    public void CheckForSwitchTurn(bool isCapturing)
+    {
+        if (isCapturing)
+            CheckForCaptures();
+
+        if (!StaticData.isObligatedToCapture)
+            SwitchTurn();
+    }
+
     public void SwitchTurn()
     {
         StaticData.isWhiteTurn = !StaticData.isWhiteTurn;
@@ -24,15 +39,16 @@ public class TurnsManager : MonoBehaviour
         if(!StaticData.isObligatedToCapture)
         {
             if ((!IsMovePossible(StaticData.isWhiteTurn) && !IsMovePossible(!StaticData.isWhiteTurn)) || drawCounter <= 0)
-               EndGame(3); //Draw
+               StartCoroutine(EndGame(3)); //Draw
             else if (!IsMovePossible(StaticData.isWhiteTurn))
-                EndGame(StaticData.isWhiteTurn ? 2 : 1); //Win 
+                StartCoroutine(EndGame(StaticData.isWhiteTurn ? 2 : 1)); //Win 
         }
     }
     
-    private void EndGame(int sceneId)
+    private IEnumerator EndGame(int sceneId)
     {
         isGameEnded = true;
+        yield return new WaitForSeconds(loadResultSceneDelay);
         StaticData.firstPlay = false;
         SceneManager.LoadScene(sceneId);
     }

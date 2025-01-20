@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AnimationsManager : MonoBehaviour
 {
@@ -9,8 +11,19 @@ public class AnimationsManager : MonoBehaviour
     [SerializeField] private GameObject whiteCamera;
     [SerializeField] private GameObject blackCamera;
 
+    [Header("Pieces")]
+    [SerializeField] private float destroyPieceDelay;
+    [SerializeField] private int fragmentCount;
+
+    public delegate void PieceAnimationEvent(bool isCapturing);
+    public event PieceAnimationEvent OnPieceMovementFinished;
+
     private bool isAnimationsOn;
 
+    private void Start()
+    {
+
+    }
     public void SetAnimationsState(bool isOn)
     {
         isAnimationsOn = isOn;
@@ -25,12 +38,17 @@ public class AnimationsManager : MonoBehaviour
         blackCamera.SetActive(!blackCamera.activeSelf);
     }
 
-    public void MovePiece(Transform pieceTransform, Vector3 targetPos, float duration)
+    public void MovePiece(Transform pieceTransform, Vector3 targetPos, float duration, bool isCapturing)
     {
-        StartCoroutine(MovePieceCoroutine(pieceTransform, targetPos, duration));
+        StartCoroutine(MovePieceCoroutine(pieceTransform, targetPos, duration, isCapturing));
     }
 
-    private IEnumerator MovePieceCoroutine(Transform pieceTransform, Vector3 targetPos, float duration)
+    public void DestroyPiece(GameObject piece)
+    {
+        StartCoroutine(DestroyPieceCoroutine(piece, isAnimationsOn ? destroyPieceDelay : 0));
+    }
+
+    private IEnumerator MovePieceCoroutine(Transform pieceTransform, Vector3 targetPos, float duration, bool isCapturing)
     {
         if(isAnimationsOn)
         {
@@ -46,5 +64,19 @@ public class AnimationsManager : MonoBehaviour
         }
 
         pieceTransform.localPosition = targetPos;
+        OnPieceMovementFinished.Invoke(isCapturing);
+    }
+
+    private IEnumerator DestroyPieceCoroutine(GameObject piece, float delay)
+    {
+        piece.GetComponent<Rigidbody>().isKinematic = !isAnimationsOn;
+
+        Fracture fracture = piece.AddComponent<Fracture>();
+        fracture.triggerOptions.triggerType = TriggerType.Collision;
+        fracture.fractureOptions.fragmentCount = fragmentCount;
+        fracture.triggerOptions.triggerAllowedTags.Add("Piece");
+
+        yield return new WaitForSeconds(delay);
+        Destroy(piece);
     }
 }
