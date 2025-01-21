@@ -4,7 +4,7 @@ Models:
 • Checker
 • King
 • Board
-• Pile of broken checkers
+• Pile of checkers
 • Play again button
 • Result sign
 • Handshake
@@ -13,9 +13,10 @@ Models:
 Animations:
 • Zoom in board
 • Rotate board
-• Checker capture
-• King capture
-• Press Button
+• Piece movement
+• Press button
+• Handshake
+• Result sign fall
 
 Textures/Materials:
 • Green square
@@ -45,19 +46,20 @@ Sprites:
 • Silver crown
 • Exit button
 • Back button
+• Instructions
 
 Prefabs:
-• Checker
-• Black king
-• White king
+• White/Black checker
+• White/Black king
 • Board
 • Play again button
 • Result sign
+• Floor
+• Pile of checkers
 
 Sounds:
-• Checker move
-• Capture
-• End of game (win / lose)
-• End of game (draw)
+• Piece move
+• Piece capture
+• End of game
 • Turning into a king
 • Confirmation window

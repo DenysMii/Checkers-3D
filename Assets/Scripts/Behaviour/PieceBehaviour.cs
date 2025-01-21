@@ -7,7 +7,9 @@ using static CoordsOperations;
 public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] public bool isWhite;
-    [SerializeField] private float movePieceDuration;
+    [SerializeField] private AudioClip moveAudio;
+    [SerializeField] private AudioClip captureAudio;
+    [SerializeField] private AudioSource audioSource;
 
     public bool isDestroyed { get; set; }
     public List<int[]> highlightedSquaresBPos { get; protected set; }
@@ -23,11 +25,17 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
         new int[]{ -1, -1 },
     };
 
+    private void Start()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
     public void OnPointerDown(PointerEventData pointerEventData)
     {
         if (isWhite == StaticData.isWhiteTurn && pointerEventData.button == PointerEventData.InputButton.Left)
             HighlightPossibleSquares();
     }
+
     public bool IsPossibleToCapture()
     {
         SetCaptureHighlightSquaresBPos();
@@ -70,8 +78,15 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
         newSquare.currentPressedPiece = null;
         attachedSquare = newSquare;
 
-        Vector3 targetPos = new Vector3(newSquare.transform.position.x, 0, newSquare.transform.position.z);
-        StaticData.animationsManager.MovePiece(transform, targetPos, movePieceDuration, isCapturing);
+        Vector3 targetPos = new Vector3(newSquare.transform.position.x, 1, newSquare.transform.position.z);
+        Rigidbody rb = GetComponent<Rigidbody>();
+        StaticData.animationsManager.MovePiece(rb, targetPos, isCapturing);
+
+        if (!isCapturing)
+            audioSource.clip = moveAudio;
+        else
+            audioSource.clip = captureAudio;
+        audioSource.Play();
     }
 
     public void CaptureOpponentPiece(SquareBehaviour newSquare)
@@ -83,12 +98,7 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
         };
 
         SquareBehaviour squareWithOpponent = StaticData.GetSquare(opponentPieceBPos);
-        
-        squareWithOpponent.attachedPiece.isDestroyed = true;
-        StaticData.animationsManager.DestroyPiece(squareWithOpponent.attachedPiece.gameObject);
-
-        squareWithOpponent.isOccupied = false;
-        squareWithOpponent.attachedPiece = null;
+        squareWithOpponent.DestroyAttachedPiece();
     }
 
     protected abstract void SetMoveHighlightSquaresBPos();

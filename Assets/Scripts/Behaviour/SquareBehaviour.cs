@@ -24,27 +24,40 @@ public class SquareBehaviour : MonoBehaviour, IPointerDownHandler
     {
         if(pointerEventData.button == PointerEventData.InputButton.Left)
         {
-            if (highlightStatus != HighlightStatus.NotHighlighted)
-            {
-                if (isKingPromoteSquare && currentPressedPiece.isWhite == promoteForWhite && currentPressedPiece is CheckerBehaviour)
-                {
-                    CheckerBehaviour currentChecker = currentPressedPiece as CheckerBehaviour;
-                    currentPressedPiece = StaticData.boardGenerator.PromoteChecker(currentChecker);
-                }
-            }
 
             switch (highlightStatus)
             {
                 case HighlightStatus.ToMove:
                     currentPressedPiece.MoveToNewSquare(this);
+                    PromoteAttachedChecker();
                     break;
                 case HighlightStatus.ToCapture:
                     currentPressedPiece.CaptureOpponentPiece(this);
                     currentPressedPiece.MoveToNewSquare(this, true);
+                    PromoteAttachedChecker();
                     break;
             }
-
         }
+
+    }
+
+    private void PromoteAttachedChecker()
+    {
+        print(attachedPiece == null);
+        if (isKingPromoteSquare && attachedPiece.isWhite == promoteForWhite && attachedPiece is CheckerBehaviour)
+        {
+            CheckerBehaviour checker = attachedPiece as CheckerBehaviour;
+            StaticData.boardGenerator.PromoteChecker(checker);
+        }
+    }
+
+    public void DestroyAttachedPiece()
+    {
+        attachedPiece.gameObject.tag = "Destroyed Piece";
+        Destroy(attachedPiece.gameObject);
+
+        isOccupied = false;
+        attachedPiece = null;
     }
 
     public void HighlightSquare(Material material, HighlightStatus status)

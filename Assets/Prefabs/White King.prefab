@@ -136,6 +136,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: be79b1a18d6c44a44b9da27556a02c29, type: 2}
@@ -163,13 +167,13 @@ PrefabInstance:
       addedObject: {fileID: 8756445800597737492}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6435260683149028690}
+      addedObject: {fileID: 8131732096072423232}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5514459087519430033}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 890714128281011811}
+      addedObject: {fileID: 4075212471198520710}
   m_SourcePrefab: {fileID: 100100000, guid: ebee57d0f7237d54da1d4858a90daa72, type: 3}
 --- !u!4 &3833715296655499973 stripped
 Transform:
@@ -204,12 +208,12 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
---- !u!64 &6435260683149028690
-MeshCollider:
+--- !u!65 &8131732096072423232
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -226,10 +230,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3880671198093009630, guid: a96347ebca2ac0a4eb6badec103ab361, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 1.0051088}
+  m_Center: {x: 0, y: -0.00000012121458, z: -0.5084109}
 --- !u!114 &-5514459087519430033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,45 +246,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWhite: 1
-  movePieceDuration: 1
---- !u!114 &890714128281011811
-MonoBehaviour:
+  moveAudio: {fileID: 8300000, guid: 7b2b6a8860fbb024bac8f9a19bf2c9c6, type: 3}
+  captureAudio: {fileID: 8300000, guid: c84a4bfae25e48141b624e68950a6de1, type: 3}
+  audioSource: {fileID: 4075212471198520710}
+--- !u!82 &4075212471198520710
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4503537421237991551}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91fc9178a0b0c3d4bb8b6d91b16d9893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerOptions:
-    triggerType: 0
-    minimumCollisionForce: 0
-    filterCollisionsByTag: 1
-    triggerAllowedTags:
-    - Piece
-    triggerKey: 0
-  fractureOptions:
-    fragmentCount: 8
-    xAxis: 1
-    yAxis: 1
-    zAxis: 1
-    detectFloatingFragments: 0
-    asynchronous: 0
-    insideMaterial: {fileID: 2100000, guid: be79b1a18d6c44a44b9da27556a02c29, type: 2}
-    textureScale: {x: 1, y: 1}
-    textureOffset: {x: 0, y: 0}
-  refractureOptions:
-    enableRefracturing: 0
-    maxRefractureCount: 1
-    invokeCallbacks: 0
-  callbackOptions:
-    onFracture:
-      m_PersistentCalls:
-        m_Calls: []
-    onCompleted:
-      m_PersistentCalls:
-        m_Calls: []
-  currentRefractureCount: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 82c6b14b300fac74180344fb5c519dc4, type: 3}
+  m_Resource: {fileID: 8300000, guid: 82c6b14b300fac74180344fb5c519dc4, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

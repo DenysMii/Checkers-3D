@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Piece
+  - Destroyed Piece
   layers:
   - Default
   - TransparentFX
