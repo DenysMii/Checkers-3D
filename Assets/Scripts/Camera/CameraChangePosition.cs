@@ -28,7 +28,7 @@ public class CameraChangePosition : MonoBehaviour
     private float verticalAngle;
     private float distance;
 
-    private void Start()
+    private void Awake()
     {
         verticalAngle = transform.rotation.eulerAngles.x;
         horizontalAngle = transform.rotation.eulerAngles.y;

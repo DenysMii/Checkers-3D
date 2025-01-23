@@ -5,7 +5,7 @@ Models:
 • King
 • Board
 • Pile of checkers
-• Play again button
+• Back to menu button
 • Result sign
 • Handshake
 • Background checkers
@@ -52,7 +52,7 @@ Prefabs:
 • White/Black checker
 • White/Black king
 • Board
-• Play again button
+• Back to menu button
 • Result sign
 • Floor
 • Pile of checkers
@@ -63,3 +63,4 @@ Sounds:
 • End of game
 • Turning into a king
 • Confirmation window
+• Background music

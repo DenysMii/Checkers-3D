@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.dgreenheck.openfracture": "https://github.com/dgreenheck/OpenFracture.git",
     "com.judahperez.hsvcolorpicker": "3.3.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "2.0.5",

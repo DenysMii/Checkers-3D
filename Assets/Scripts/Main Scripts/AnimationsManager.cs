@@ -14,7 +14,7 @@ public class AnimationsManager : MonoBehaviour
     [SerializeField] private float pieceMovementSpeed;
     [SerializeField] private float pieceCaptureSpeed;
 
-    public delegate void PieceMovementEvent(bool isCapturing);
+    public delegate void PieceMovementEvent();
     public event PieceMovementEvent OnPieceMovementFinished;
 
     public delegate void PieceCaptureEvent(PieceBehaviour piece);
@@ -58,9 +58,9 @@ public class AnimationsManager : MonoBehaviour
             pieceRB.linearVelocity = Vector3.zero;
         }
 
-        pieceRB.position = targetPos;
+        pieceRB.gameObject.transform.position = targetPos;
         if(isCapturing)
             OnPieceCapture.Invoke(pieceRB.GetComponent<PieceBehaviour>());
-        OnPieceMovementFinished.Invoke(isCapturing);
+        OnPieceMovementFinished.Invoke();
     }
 }

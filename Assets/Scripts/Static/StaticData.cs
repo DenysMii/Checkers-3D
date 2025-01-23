@@ -2,7 +2,6 @@ using UnityEngine;
 
 public static class StaticData
 {
-    public static bool firstPlay = true;
     public static bool isWhiteTurn = true;
     public static bool isObligatedToCapture = false;
 
@@ -16,14 +15,14 @@ public static class StaticData
 
     public static short[,] piecesStartingPos =
     {
+        { 1, 0, 1, 0, 1, 0, 1, 0 },
+        { 0, 1, 0, 1, 0, 1, 0, 1 },
+        { 1, 0, 1, 0, 1, 0, 1, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 2, 0, 0, 0, 1, 0, 0 },
-        { 0, 0, 0, 0, 2, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0 }
+        { 0, 2, 0, 2, 0, 2, 0, 2 },
+        { 2, 0, 2, 0, 2, 0, 2, 0 },
+        { 0, 2, 0, 2, 0, 2, 0, 2 }
     };
     // 1 - white pieces
     // 2 - black pieces

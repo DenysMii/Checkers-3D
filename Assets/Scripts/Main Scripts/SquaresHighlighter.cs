@@ -42,7 +42,8 @@ public class SquaresHighlighter : MonoBehaviour
             if (square != null && !square.isOccupied)
             {
                 Material materialToHighlight;
-                if (square.isKingPromoteSquare && currentPiece is CheckerBehaviour && currentPiece.isWhite == square.promoteForWhite)
+                if (square is PromoteSquareBehaviour && currentPiece is CheckerBehaviour 
+                    && currentPiece.isWhite == (square as PromoteSquareBehaviour).promoteForWhite)
                     materialToHighlight = yellowSquare;
                 else if (highlightStatus == HighlightStatus.ToMove)
                     materialToHighlight = greenSquare;

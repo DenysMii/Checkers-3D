@@ -26,20 +26,23 @@ public class BoardGenerator : MonoBehaviour
         {
             for (int j = i % 2; j < 8; j += 2)
             {
-                SquareBehaviour newSquare = squares[squaresCounter].gameObject.AddComponent<SquareBehaviour>();
-                newSquare.boardPos = new int[2] { i, j };
-                if(i == 0)
-                {
-                    newSquare.isKingPromoteSquare = true;
-                    newSquare.promoteForWhite = false;
-                }
-                else if (i == 7)
-                {
-                    newSquare.isKingPromoteSquare = true;
-                    newSquare.promoteForWhite = true;
-                }
-                StaticData.squares[i, j] = newSquare;
+                SquareBehaviour newSquare = null;
 
+                switch (i)
+                {
+                    case 0:
+                    case 7:
+                        PromoteSquareBehaviour promoteSquare = squares[squaresCounter].gameObject.AddComponent<PromoteSquareBehaviour>();
+                        promoteSquare.promoteForWhite = (i == 7); // true for case 7, false for case 0
+                        newSquare = promoteSquare;
+                        break;
+                    default:
+                        newSquare = squares[squaresCounter].gameObject.AddComponent<SquareBehaviour>();
+                        break;
+                }
+
+                newSquare.boardPos = new int[2] { i, j };
+                StaticData.squares[i, j] = newSquare;
                 squaresCounter++;
             }
         }

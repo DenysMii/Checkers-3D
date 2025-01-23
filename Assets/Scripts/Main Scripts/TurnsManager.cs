@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class TurnsManager : MonoBehaviour
 {
     [SerializeField] private float loadResultSceneDelay;
+    [SerializeField] private float switchCameraDelay;
+
     [SerializeField] private GameObject whitePiecesHolder;
     [SerializeField] private GameObject blackPiecesHolder;
 
@@ -15,21 +17,24 @@ public class TurnsManager : MonoBehaviour
     private void Start()
     {
         StaticData.animationsManager.OnPieceCapture += CheckForExtraCapture;
-        StaticData.animationsManager.OnPieceMovementFinished += CheckForSwitchTurn;
+        StaticData.animationsManager.OnPieceMovementFinished += SwitchTurn;
     }
 
-    public void CheckForSwitchTurn(bool isCapturing)
+    public void SwitchTurn()
     {
+        StartCoroutine(SwitchTurnCoroutine());
+    }
+
+    private IEnumerator SwitchTurnCoroutine()
+    {
+        yield return new WaitForSeconds(switchCameraDelay);
         if (!StaticData.isObligatedToCapture)
-            SwitchTurn();
-    }
-
-    private void SwitchTurn()
-    {
-        StaticData.isWhiteTurn = !StaticData.isWhiteTurn;
-        CheckForEndGame();
-        if(!isGameEnded)
-            StaticData.animationsManager.SwitchCamera();
+        {
+            StaticData.isWhiteTurn = !StaticData.isWhiteTurn;
+            CheckForEndGame();
+            if (!isGameEnded)
+                StaticData.animationsManager.SwitchCamera();
+        }
     }
 
     private void CheckForEndGame()
@@ -56,7 +61,6 @@ public class TurnsManager : MonoBehaviour
     {
         isGameEnded = true;
         yield return new WaitForSeconds(loadResultSceneDelay);
-        StaticData.firstPlay = false;
         SceneManager.LoadScene(sceneId);
     }
 
