@@ -11,9 +11,10 @@ public abstract class PieceBehaviour : MonoBehaviour, IPointerDownHandler
     [SerializeField] private AudioClip captureAudio;
     [SerializeField] private AudioSource audioSource;
 
+    public SquareBehaviour attachedSquare;
     public List<int[]> highlightedSquaresBPos { get; protected set; }
     public List<int[]> captureSquaresBPos { get; protected set; }
-    public SquareBehaviour attachedSquare { get; set; }
+    
 
     protected List<int[]> squaresDir = new List<int[]>
     {

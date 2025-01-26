@@ -2,7 +2,7 @@ using UnityEngine.EventSystems;
 
 public class PromoteSquareBehaviour : SquareBehaviour
 {
-    public bool promoteForWhite { get; set; }
+    public bool promoteForWhite;
 
     public override void OnPointerDown(PointerEventData pointerEventData)
     {
@@ -28,7 +28,7 @@ public class PromoteSquareBehaviour : SquareBehaviour
         if (attachedPiece.isWhite == promoteForWhite && attachedPiece is CheckerBehaviour)
         {
             CheckerBehaviour checker = attachedPiece as CheckerBehaviour;
-            StaticData.boardGenerator.PromoteChecker(checker);
+            StaticData.piecesGenerator.PromoteChecker(checker);
             StaticData.animationsManager.OnPieceMovementFinished -= PromoteAttachedChecker;
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static CoordsOperations;
@@ -26,9 +27,9 @@ public class CheckerBehaviour : PieceBehaviour
         captureSquaresBPos = new List<int[]>();
         foreach (var squareDir in squaresDir)
         {
-            SquareBehaviour square = StaticData.GetSquare(CoordsSum(attachedSquare.boardPos, squareDir));
-            if (square != null && square.isOccupied && square.attachedPiece.isWhite != isWhite)
-                captureSquaresBPos.Add(square.boardPos);
+            SquareBehaviour squareBehaviour = StaticData.GetSquare(CoordsSum(attachedSquare.boardPos, squareDir));
+            if (squareBehaviour != null && squareBehaviour.isOccupied && squareBehaviour.attachedPiece.isWhite != isWhite)
+                captureSquaresBPos.Add(squareBehaviour.boardPos);
         }
     }
 

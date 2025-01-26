@@ -7,10 +7,13 @@ public static class StaticData
 
     public static Material blackSquareMaterial;
 
-    public static BoardGenerator boardGenerator;
+    public static PiecesGenerator piecesGenerator;
     public static SquaresHighlighter squaresHighlighter;
     public static TurnsManager turnsManager;
     public static AnimationsManager animationsManager;
+
+    public static float startPos = -7;
+    public static float squaresDiff = 2;
 
 
     public static short[,] piecesStartingPos =

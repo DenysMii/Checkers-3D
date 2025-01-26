@@ -67,9 +67,9 @@ public class TurnsManager : MonoBehaviour
     public void CheckForCaptures()
     {
         GameObject pieceHolder = StaticData.isWhiteTurn ? whitePiecesHolder : blackPiecesHolder;
-        PieceBehaviour[] currentPieces = pieceHolder.GetComponentsInChildren<PieceBehaviour>();
+        PieceBehaviour[] pieceBehaviours = pieceHolder.GetComponentsInChildren<PieceBehaviour>();
 
-        foreach (PieceBehaviour pieceBehaviour in currentPieces)
+        foreach (PieceBehaviour pieceBehaviour in pieceBehaviours)
         {
             if (pieceBehaviour.IsPossibleToCapture() && !pieceBehaviour.gameObject.tag.Equals("Destroyed Piece"))
             {

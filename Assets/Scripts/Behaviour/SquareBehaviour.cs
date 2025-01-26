@@ -3,10 +3,10 @@ using UnityEngine.EventSystems;
 
 public class SquareBehaviour : MonoBehaviour, IPointerDownHandler
 {
-    public int[] boardPos { get; set; }
-    public bool isOccupied { get; set; }
+    [SerializeField] public int[] boardPos;
+    public bool isOccupied;
 
-    public PieceBehaviour attachedPiece { get; set; }
+    public PieceBehaviour attachedPiece;
     public PieceBehaviour currentPressedPiece { protected get; set; }
 
     protected HighlightStatus highlightStatus;

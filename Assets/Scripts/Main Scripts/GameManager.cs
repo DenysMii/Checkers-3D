@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private GameObject instructions;
 
+    [Header("Generators")]
+    [SerializeField] private SquaresGenerator squaresGenerator;
+    [SerializeField] private PiecesGenerator piecesGenerator;
+
     [Header("Main Scripts")]
-    [SerializeField] private BoardGenerator boardGenerator;
     [SerializeField] private PlayerPrefsLoader playerPrefsLoader;
     [SerializeField] private SquaresHighlighter squaresHighlighter;
     [SerializeField] private TurnsManager turnsManager;
@@ -18,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         StaticData.isWhiteTurn = true;
 
-        StaticData.boardGenerator = boardGenerator;
+        StaticData.piecesGenerator = piecesGenerator;
         StaticData.squaresHighlighter = squaresHighlighter;
         StaticData.turnsManager = turnsManager;
         StaticData.animationsManager = animationsManager;
@@ -29,8 +32,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Need Instructions", 0);
         }
 
-        boardGenerator.SetSquares();
-        boardGenerator.GeneratePieces();
+        squaresGenerator.LoadSquaresBehaviours();
         playerPrefsLoader.LoadPlayerPrefs();
         turnsManager.CheckForCaptures();
     }

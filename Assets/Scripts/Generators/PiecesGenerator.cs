@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 
-public class BoardGenerator : MonoBehaviour
+public class PiecesGenerator : MonoBehaviour
 {
-    [Header("GameObjects Holders")]
-    [SerializeField] private GameObject squaresHolder;
+    [Header("Pieces Holders")]
     [SerializeField] private GameObject whitePiecesHolder;
     [SerializeField] private GameObject blackPiecesHolder;
 
@@ -14,44 +13,11 @@ public class BoardGenerator : MonoBehaviour
     [SerializeField] private GameObject whiteKingPrefab;
     [SerializeField] private GameObject blackKingPrefab;
 
-    private float startPos = -7;
-    private float squaresDiff = 2;
-
-    public void SetSquares()
-    {
-        Transform[] squares = squaresHolder.GetComponentsInChildren<Transform>();
-        int squaresCounter = 1;
-
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = i % 2; j < 8; j += 2)
-            {
-                SquareBehaviour newSquare = null;
-
-                switch (i)
-                {
-                    case 0:
-                    case 7:
-                        PromoteSquareBehaviour promoteSquare = squares[squaresCounter].gameObject.AddComponent<PromoteSquareBehaviour>();
-                        promoteSquare.promoteForWhite = (i == 7); // true for case 7, false for case 0
-                        newSquare = promoteSquare;
-                        break;
-                    default:
-                        newSquare = squares[squaresCounter].gameObject.AddComponent<SquareBehaviour>();
-                        break;
-                }
-
-                newSquare.boardPos = new int[2] { i, j };
-                StaticData.squares[i, j] = newSquare;
-                squaresCounter++;
-            }
-        }
-    }
-
+    [ContextMenu("Generate Pieces")]
     public void GeneratePieces()
     {
         short[,] piecesPos = StaticData.piecesStartingPos;
-        for(int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
             for(int j = 0; j < 8; j++)
             {
@@ -64,7 +30,7 @@ public class BoardGenerator : MonoBehaviour
     {
         if (pieceNumber == 0) return;
 
-        GameObject newPiece;
+        GameObject newPiece = null;
         switch (pieceNumber)
         {
             case 1:
@@ -83,24 +49,46 @@ public class BoardGenerator : MonoBehaviour
                 newPiece = Instantiate(blackKingPrefab, blackPiecesHolder.transform);
                 newPiece.name = "BlackKing " + i + j;
                 break;
-            default:
-                newPiece = new GameObject();
-                break;
         }
 
-        Vector3 localPos = new Vector3(startPos + j * squaresDiff, 0, startPos + i * squaresDiff);
+        Vector3 localPos = new Vector3(StaticData.startPos + j * StaticData.squaresDiff, 0, StaticData.startPos + i * StaticData.squaresDiff);
         newPiece.transform.SetLocalPositionAndRotation(localPos, newPiece.transform.rotation);
 
-        PieceBehaviour newPieceScript = newPiece.GetComponent<PieceBehaviour>();
-        SetSquareBehavoiur(newPieceScript, i, j);
-        
+        PieceBehaviour newPieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
+        AttachPieceSquare(newPiece); 
     }
 
-    private void SetSquareBehavoiur(PieceBehaviour pieceBehaviour, int i, int j )
+    private void AttachPieceSquare(GameObject piece)
     {
-        pieceBehaviour.attachedSquare = StaticData.squares[i, j];
-        pieceBehaviour.attachedSquare.isOccupied = true;
-        pieceBehaviour.attachedSquare.attachedPiece = pieceBehaviour;
+        Vector3 piecePos = piece.transform.position;
+        Vector3 rayOrigin = new(piecePos.x, piecePos.y + 1, piecePos.z);
+
+        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hitInfo, 1))
+        {
+            GameObject hitSquare = hitInfo.collider.gameObject;
+
+            SquareBehaviour squareBehaviour = hitSquare.GetComponent<SquareBehaviour>();
+            PieceBehaviour pieceBehaviour = piece.GetComponent<PieceBehaviour>();
+
+            pieceBehaviour.attachedSquare = squareBehaviour;
+            squareBehaviour.attachedPiece = pieceBehaviour;
+            squareBehaviour.isOccupied = true;
+        }
+    }
+
+    [ContextMenu("Delete All Pieces")]
+    public void DeleteAllPieces()
+    {
+        DeletePieces(whitePiecesHolder);
+        DeletePieces(blackPiecesHolder);
+    }
+
+    private void DeletePieces(GameObject holder)
+    {
+        for (int i = holder.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(holder.transform.GetChild(i).gameObject);
+        }
     }
 
     public KingBehaviour PromoteChecker(CheckerBehaviour checkerBehaviour)
