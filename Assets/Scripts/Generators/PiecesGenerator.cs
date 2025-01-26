@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 public class PiecesGenerator : MonoBehaviour
 {
@@ -55,25 +56,6 @@ public class PiecesGenerator : MonoBehaviour
         newPiece.transform.SetLocalPositionAndRotation(localPos, newPiece.transform.rotation);
 
         PieceBehaviour newPieceBehaviour = newPiece.GetComponent<PieceBehaviour>();
-        AttachPieceSquare(newPiece); 
-    }
-
-    private void AttachPieceSquare(GameObject piece)
-    {
-        Vector3 piecePos = piece.transform.position;
-        Vector3 rayOrigin = new(piecePos.x, piecePos.y + 1, piecePos.z);
-
-        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hitInfo, 1))
-        {
-            GameObject hitSquare = hitInfo.collider.gameObject;
-
-            SquareBehaviour squareBehaviour = hitSquare.GetComponent<SquareBehaviour>();
-            PieceBehaviour pieceBehaviour = piece.GetComponent<PieceBehaviour>();
-
-            pieceBehaviour.attachedSquare = squareBehaviour;
-            squareBehaviour.attachedPiece = pieceBehaviour;
-            squareBehaviour.isOccupied = true;
-        }
     }
 
     [ContextMenu("Delete All Pieces")]
@@ -110,7 +92,7 @@ public class PiecesGenerator : MonoBehaviour
         oldChecker.tag = "Destroyed Piece";
         Destroy(oldChecker);
 
-        if (newKingBehaviour.IsPossibleToCapture())
+        if (StaticData.isObligatedToCapture && newKingBehaviour.IsPossibleToCapture())
             StaticData.isObligatedToCapture = true;
 
         return newKingBehaviour;

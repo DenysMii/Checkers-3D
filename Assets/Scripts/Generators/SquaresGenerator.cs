@@ -41,6 +41,7 @@ public class SquaresGenerator : MonoBehaviour
         newSquare.name = name;
 
         GenerateSquareBehaviour(newSquare, i, j);
+        AttachPieceSquare(newSquare);
     }
 
     private void GenerateSquareBehaviour(GameObject square, int i, int j)
@@ -61,6 +62,29 @@ public class SquaresGenerator : MonoBehaviour
         }
 
         newSquareBehaviour.boardPos = new int[2] { i, j };
+    }
+
+    private void AttachPieceSquare(GameObject square)
+    {
+        Vector3 squarePos = square.transform.position;
+        Vector3 rayOrigin = new(squarePos.x, squarePos.y, squarePos.z);
+
+        SquareBehaviour squareBehaviour = square.GetComponent<SquareBehaviour>();
+        if (Physics.Raycast(rayOrigin, Vector3.up, out RaycastHit hitInfo, 1))
+        {
+            GameObject hitPiece = hitInfo.collider.gameObject;
+            PieceBehaviour pieceBehaviour = hitPiece.GetComponent<PieceBehaviour>();
+
+            squareBehaviour.attachedPiece = pieceBehaviour;
+            pieceBehaviour.attachedSquare = squareBehaviour;
+            squareBehaviour.isOccupied = true;
+        }
+        else
+        {
+            squareBehaviour.attachedPiece = null;
+            squareBehaviour.isOccupied = false;
+        }
+
     }
 
     [ContextMenu("Delete All Squares")]

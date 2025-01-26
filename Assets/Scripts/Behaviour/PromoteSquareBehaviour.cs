@@ -28,8 +28,8 @@ public class PromoteSquareBehaviour : SquareBehaviour
         if (attachedPiece.isWhite == promoteForWhite && attachedPiece is CheckerBehaviour)
         {
             CheckerBehaviour checker = attachedPiece as CheckerBehaviour;
-            StaticData.piecesGenerator.PromoteChecker(checker);
-            StaticData.animationsManager.OnPieceMovementFinished -= PromoteAttachedChecker;
+            StaticData.piecesGenerator.PromoteChecker(checker); 
         }
+        StaticData.animationsManager.OnPieceMovementFinished -= PromoteAttachedChecker;
     }
 }
