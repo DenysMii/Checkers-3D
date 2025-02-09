@@ -1,1 +1,1 @@
-# Universal-3D-Unity-6-Template
+Checkers 3D
