@@ -2,6 +2,9 @@
 
 Checkers 3D is a modern take on the classic checkers game, inspired by Chess Titans. It combines traditional gameplay with polished 3D design, offering an immersive experience for players.
 
+## Play the Game
+🎮 Try the game on [itch.io](https://glitchy-box.itch.io/checkers-3d)
+
 ## Features
 
 - **3D Graphics**: Engage with a visually appealing board and piece design.
