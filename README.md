@@ -30,3 +30,6 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/DenysMii/Checkers-3D.git
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
